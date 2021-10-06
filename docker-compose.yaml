@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  backend2:
+    container_name: backend2
+    build: ./backend
+    networks: 
+      - net
+
+  frontend2:
+    container_name: frontend2
+    build: ./frontend
+    networks: 
+      - net
+
+  entry2:
+    container_name: entry2
+    build: ./entry
+    depends_on:
+      - frontend2
+      - backend2
+    ports:
+      - "5000:5000"
+    networks: 
+      - net
+
+networks:
+  net:
+    name: network
+    driver: bridge
